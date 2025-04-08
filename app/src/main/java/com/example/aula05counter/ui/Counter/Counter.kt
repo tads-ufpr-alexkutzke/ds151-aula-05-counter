@@ -2,6 +2,7 @@ package com.example.aula05counter.ui.Counter
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -12,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.aula05counter.ui.theme.Aula05CounterTheme
 
 @Composable
@@ -19,7 +21,7 @@ fun Counter(modifier: Modifier = Modifier){
     var count: MutableState<Int> = remember {  mutableStateOf(0) };
     Surface(modifier = modifier) {
         Row(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier.padding(start=20.dp,end=20.dp).fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
         ){
             Text(

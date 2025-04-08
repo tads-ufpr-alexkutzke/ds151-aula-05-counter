@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Aula05CounterTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Counter()
+                    Counter(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
