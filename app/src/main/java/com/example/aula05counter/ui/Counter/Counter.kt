@@ -32,8 +32,8 @@ fun Counter(
     max: Int = Int.MAX_VALUE,
     min: Int = Int.MIN_VALUE,
     count: Int = 0,
-    onIncrement: () -> Unit = {},
-    onDecrement: () -> Unit = {},
+    onIncrement: (min:Int, max:Int) -> Unit = {min,max -> Unit},
+    onDecrement: (min:Int, max:Int) -> Unit = {min,max -> Unit},
 ){
     Surface(modifier = modifier) {
         Row(
@@ -51,12 +51,12 @@ fun Counter(
 
             ){
                 ElevatedButton(
-                    onClick =  onDecrement ,
+                    onClick =  { onDecrement(min,max) },
                 ) {
                     Text("-")
                 }
                 ElevatedButton(
-                    onClick = onIncrement,
+                    onClick = { onIncrement(min,max) },
                 ) {
                     Text("+")
                 }
@@ -73,8 +73,8 @@ fun PreviewCounter(){
             var count by remember { mutableStateOf(0) }
             Counter(
                 count = count,
-                onIncrement = { count++ },
-                onDecrement = { count-- },
+                onIncrement = { min:Int, max:Int -> if(count < max) count++ },
+                onDecrement = { min:Int, max:Int -> if(count > min) count-- },
                 min=0,
                 max=10
             )
