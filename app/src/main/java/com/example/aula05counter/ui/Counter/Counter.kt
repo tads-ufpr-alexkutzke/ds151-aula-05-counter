@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.example.aula05counter.ui.theme.Aula05CounterTheme
 
 @Composable
-fun Counter(modifier: Modifier = Modifier){
+fun Counter(modifier: Modifier = Modifier, max: Int = Int.MAX_VALUE, min: Int = Int.MIN_VALUE){
     var count by remember {  mutableStateOf(0) }
     Surface(modifier = modifier) {
         Row(
@@ -39,12 +39,12 @@ fun Counter(modifier: Modifier = Modifier){
 
             ){
                 ElevatedButton(
-                    onClick = { count-- },
+                    onClick = { if(count > min) count-- },
                 ) {
                     Text("-")
                 }
                 ElevatedButton(
-                    onClick = { count++ },
+                    onClick = { if(count < max) count++ },
                 ) {
                     Text("+")
                 }
@@ -57,6 +57,6 @@ fun Counter(modifier: Modifier = Modifier){
 @Composable
 fun PreviewCounter(){
     Aula05CounterTheme {
-        Counter()
+        Counter(min=0, max=10)
     }
 }
