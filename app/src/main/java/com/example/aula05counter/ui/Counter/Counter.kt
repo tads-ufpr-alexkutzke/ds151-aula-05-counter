@@ -3,6 +3,7 @@ package com.example.aula05counter.ui.Counter
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -18,16 +19,21 @@ import com.example.aula05counter.ui.theme.Aula05CounterTheme
 
 @Composable
 fun Counter(modifier: Modifier = Modifier){
-    var count: MutableState<Int> = remember {  mutableStateOf(0) };
+    var count: MutableState<Int> = remember {  mutableStateOf(0) }
     Surface(modifier = modifier) {
         Row(
-            modifier = modifier.padding(start=20.dp,end=20.dp).fillMaxWidth(),
+            modifier = modifier.padding(horizontal = 20.dp, vertical = 5.dp).fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
         ){
             Text(
                 text="Número de Cliques: ${count.value}",
                 modifier = Modifier.weight(1f)
             )
+            ElevatedButton(
+                onClick = { count.value-- }
+            ) {
+                Text("-")
+            }
             ElevatedButton(
                 onClick = { count.value++ },
             ) {
@@ -37,7 +43,7 @@ fun Counter(modifier: Modifier = Modifier){
     }
 }
 
-@Preview(widthDp = 320)
+@Preview(widthDp = 480)
 @Composable
 fun PreviewCounter(){
     Aula05CounterTheme {
