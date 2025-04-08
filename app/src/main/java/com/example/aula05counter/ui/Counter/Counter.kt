@@ -70,7 +70,14 @@ fun Counter(
 fun PreviewCounter(){
     Aula05CounterTheme {
         Column {
-            Counter(min=0, max=10)
+            var count by remember { mutableStateOf(0) }
+            Counter(
+                count = count,
+                onIncrement = { count++ },
+                onDecrement = { count-- },
+                min=0,
+                max=10
+            )
         }
     }
 }
