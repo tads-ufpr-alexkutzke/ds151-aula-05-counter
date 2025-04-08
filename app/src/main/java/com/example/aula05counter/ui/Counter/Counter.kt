@@ -24,7 +24,7 @@ fun Counter(modifier: Modifier = Modifier){
                 modifier = Modifier.weight(1f)
             )
             ElevatedButton(
-                onClick = { /* TODO */ },
+                onClick = { count++ },
             ) {
                 Text("+")
             }
