@@ -29,6 +29,7 @@ import com.example.aula05counter.ui.theme.Aula05CounterTheme
 @Composable
 fun Counter(
     modifier: Modifier = Modifier,
+    text:String = "Número de Cliques",
     max: Int = Int.MAX_VALUE,
     min: Int = Int.MIN_VALUE,
     step: Int = 1,
@@ -42,7 +43,7 @@ fun Counter(
             verticalAlignment = Alignment.CenterVertically,
         ){
             Text(
-                text="Número de Cliques: ${count}",
+                text=text + " ${count}",
                 modifier = Modifier.weight(1f)
             )
             Row(
@@ -95,6 +96,7 @@ fun RGBCounterScreen(){
     ) {
         Column(modifier = Modifier.weight(0.5f)) {
             Counter(
+                text="R",
                 min=0,
                 max=255,
                 step=10,
@@ -103,6 +105,7 @@ fun RGBCounterScreen(){
                 onDecrement = { min:Int, max:Int, step:Int -> if(countR-step > min) countR-=step else countR = min },
             )
             Counter(
+                text="G",
                 min=0,
                 max=255,
                 step=10,
@@ -111,6 +114,7 @@ fun RGBCounterScreen(){
                 onDecrement = { min:Int, max:Int, step:Int -> if(countG-step > min) countG-=step else countG = min },
             )
             Counter(
+                text="B",
                 min=0,
                 max=255,
                 step=10,
