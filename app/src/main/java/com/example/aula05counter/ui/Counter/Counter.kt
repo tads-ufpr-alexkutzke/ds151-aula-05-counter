@@ -85,11 +85,27 @@ fun PreviewCounter(){
     }
 }
 
+class RGBCount {
+    var count by mutableStateOf(0) ;
+
+    fun update(min:Int, max:Int, step:Int) {
+        if(step < 0){
+            if(count+step > min) count+=step
+            else count = min
+        }
+        else{
+            if(count+step < max) count+=step
+            else count = max
+        }
+    }
+}
+
 @Composable
 fun RGBCounterScreen(){
-    var countR by remember { mutableStateOf(0) }
-    var countG by remember { mutableStateOf(0) }
-    var countB by remember { mutableStateOf(0) }
+    var countR by remember { mutableStateOf(RGBCount()) }
+    var countG by remember { mutableStateOf(RGBCount()) }
+    var countB by remember { mutableStateOf(RGBCount()) }
+
     Column(
         modifier = Modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -100,34 +116,34 @@ fun RGBCounterScreen(){
                 min=0,
                 max=255,
                 step=10,
-                count = countR,
-                onIncrement = { min:Int, max:Int, step:Int -> if(countR+step < max) countR+=step else countR = max },
-                onDecrement = { min:Int, max:Int, step:Int -> if(countR-step > min) countR-=step else countR = min },
+                count = countR.count,
+                onIncrement = { min:Int, max:Int, step:Int -> countR.update(min,max,step) },
+                onDecrement = { min:Int, max:Int, step:Int -> countR.update(min,max,-step) },
             )
             Counter(
                 text="G",
                 min=0,
                 max=255,
                 step=10,
-                count = countG,
-                onIncrement = { min:Int, max:Int, step:Int -> if(countG+step < max) countG+=step else countG = max },
-                onDecrement = { min:Int, max:Int, step:Int -> if(countG-step > min) countG-=step else countG = min },
+                count = countG.count,
+                onIncrement = { min:Int, max:Int, step:Int -> countG.update(min,max,step) },
+                onDecrement = { min:Int, max:Int, step:Int -> countG.update(min,max,-step) },
             )
             Counter(
                 text="B",
                 min=0,
                 max=255,
                 step=10,
-                count = countB,
-                onIncrement = { min:Int, max:Int, step:Int -> if(countB+step < max) countB+=step else countB = max },
-                onDecrement = { min:Int, max:Int, step:Int -> if(countB-step > min) countB-=step else countB = min },
+                count = countB.count,
+                onIncrement = { min:Int, max:Int, step:Int -> countB.update(min,max,step) },
+                onDecrement = { min:Int, max:Int, step:Int -> countB.update(min,max,-step) },
             )
         }
 
         Column(modifier = Modifier.weight(0.5f)) {
             Box(
                 modifier = Modifier
-                    .background(color = Color(countR, countG, countB, 255))
+                    .background(color = Color(countR.count, countG.count, countB.count, 255))
                     .height(100.dp)
                     .width(100.dp)
             )
