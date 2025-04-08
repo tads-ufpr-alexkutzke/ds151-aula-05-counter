@@ -1,6 +1,7 @@
 package com.example.aula05counter.ui.Counter
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -57,6 +58,26 @@ fun Counter(modifier: Modifier = Modifier, max: Int = Int.MAX_VALUE, min: Int = 
 @Composable
 fun PreviewCounter(){
     Aula05CounterTheme {
+        Column {
+            Counter(min=0, max=10)
+        }
+    }
+}
+
+@Composable
+fun CounterScreen(){
+    Column {
         Counter(min=0, max=10)
+        Counter(min=0, max=5)
+        Counter(min=-2, max=2)
+    }
+}
+
+
+@Preview(widthDp = 480)
+@Composable
+fun PreviewCounterScreen(){
+    Aula05CounterTheme {
+        CounterScreen()
     }
 }
