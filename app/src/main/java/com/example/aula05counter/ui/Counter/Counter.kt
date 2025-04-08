@@ -31,9 +31,10 @@ fun Counter(
     modifier: Modifier = Modifier,
     max: Int = Int.MAX_VALUE,
     min: Int = Int.MIN_VALUE,
+    step: Int = 1,
     count: Int = 0,
-    onIncrement: (min:Int, max:Int) -> Unit = {min,max -> Unit},
-    onDecrement: (min:Int, max:Int) -> Unit = {min,max -> Unit},
+    onIncrement: (min:Int, max:Int, step: Int) -> Unit = {min,max,step -> Unit},
+    onDecrement: (min:Int, max:Int, step: Int) -> Unit = {min,max,step -> Unit},
 ){
     Surface(modifier = modifier) {
         Row(
@@ -51,12 +52,12 @@ fun Counter(
 
             ){
                 ElevatedButton(
-                    onClick =  { onDecrement(min,max) },
+                    onClick =  { onDecrement(min,max,step) },
                 ) {
                     Text("-")
                 }
                 ElevatedButton(
-                    onClick = { onIncrement(min,max) },
+                    onClick = { onIncrement(min,max,step) },
                 ) {
                     Text("+")
                 }
@@ -73,10 +74,11 @@ fun PreviewCounter(){
             var count by remember { mutableStateOf(0) }
             Counter(
                 count = count,
-                onIncrement = { min:Int, max:Int -> if(count < max) count++ },
-                onDecrement = { min:Int, max:Int -> if(count > min) count-- },
+                onIncrement = { min:Int, max:Int, step:Int -> if(count < max) count+=step },
+                onDecrement = { min:Int, max:Int,step:Int -> if(count > min) count-=step },
                 min=0,
-                max=10
+                max=10,
+                step=1
             )
         }
     }
@@ -95,23 +97,26 @@ fun RGBCounterScreen(){
             Counter(
                 min=0,
                 max=255,
+                step=10,
                 count = countR,
-                onIncrement = { min:Int, max:Int -> if(countR < max) countR++ },
-                onDecrement = { min:Int, max:Int -> if(countR > min) countR-- },
+                onIncrement = { min:Int, max:Int, step:Int -> if(countR+step < max) countR+=step else countR = max },
+                onDecrement = { min:Int, max:Int, step:Int -> if(countR-step > min) countR-=step else countR = min },
             )
             Counter(
                 min=0,
                 max=255,
+                step=10,
                 count = countG,
-                onIncrement = { min:Int, max:Int -> if(countG < max) countG++ },
-                onDecrement = { min:Int, max:Int -> if(countG > min) countG-- },
+                onIncrement = { min:Int, max:Int, step:Int -> if(countG+step < max) countG+=step else countG = max },
+                onDecrement = { min:Int, max:Int, step:Int -> if(countG-step > min) countG-=step else countG = min },
             )
             Counter(
                 min=0,
                 max=255,
+                step=10,
                 count = countB,
-                onIncrement = { min:Int, max:Int -> if(countB < max) countB++ },
-                onDecrement = { min:Int, max:Int -> if(countB > min) countB-- },
+                onIncrement = { min:Int, max:Int, step:Int -> if(countB+step < max) countB+=step else countB = max },
+                onDecrement = { min:Int, max:Int, step:Int -> if(countB-step > min) countB-=step else countB = min },
             )
         }
 
