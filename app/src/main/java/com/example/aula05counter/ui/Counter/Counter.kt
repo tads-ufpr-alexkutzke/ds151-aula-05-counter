@@ -1,5 +1,6 @@
 package com.example.aula05counter.ui.Counter
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -29,15 +30,22 @@ fun Counter(modifier: Modifier = Modifier){
                 text="Número de Cliques: ${count.value}",
                 modifier = Modifier.weight(1f)
             )
-            ElevatedButton(
-                onClick = { count.value-- }
-            ) {
-                Text("-")
-            }
-            ElevatedButton(
-                onClick = { count.value++ },
-            ) {
-                Text("+")
+            Row(
+                modifier = Modifier.weight(0.5f),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly,
+
+            ){
+                ElevatedButton(
+                    onClick = { count.value-- },
+                ) {
+                    Text("-")
+                }
+                ElevatedButton(
+                    onClick = { count.value++ },
+                ) {
+                    Text("+")
+                }
             }
         }
     }
