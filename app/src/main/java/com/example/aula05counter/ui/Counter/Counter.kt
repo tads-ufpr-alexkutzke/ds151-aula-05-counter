@@ -1,9 +1,13 @@
 package com.example.aula05counter.ui.Counter
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ElevatedButton
@@ -17,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.aula05counter.ui.theme.Aula05CounterTheme
@@ -65,11 +70,25 @@ fun PreviewCounter(){
 }
 
 @Composable
-fun CounterScreen(){
-    Column {
-        Counter(min=0, max=10)
-        Counter(min=0, max=5)
-        Counter(min=-2, max=2)
+fun RGBCounterScreen(){
+    Column(
+        modifier = Modifier.fillMaxHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Column(modifier = Modifier.weight(0.5f)) {
+            Counter(min=0, max=10)
+            Counter(min=0, max=5)
+            Counter(min=-2, max=2)
+        }
+
+        Column(modifier = Modifier.weight(0.5f)) {
+            Box(
+                modifier = Modifier
+                    .background(color = Color(255, 0, 0, 255))
+                    .height(100.dp)
+                    .width(100.dp)
+            )
+        }
     }
 }
 
@@ -78,6 +97,6 @@ fun CounterScreen(){
 @Composable
 fun PreviewCounterScreen(){
     Aula05CounterTheme {
-        CounterScreen()
+        RGBCounterScreen()
     }
 }
