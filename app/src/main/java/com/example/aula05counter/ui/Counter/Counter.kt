@@ -84,20 +84,41 @@ fun PreviewCounter(){
 
 @Composable
 fun RGBCounterScreen(){
+    var countR by remember { mutableStateOf(0) }
+    var countG by remember { mutableStateOf(0) }
+    var countB by remember { mutableStateOf(0) }
     Column(
         modifier = Modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(modifier = Modifier.weight(0.5f)) {
-            Counter(min=0, max=10)
-            Counter(min=0, max=5)
-            Counter(min=-2, max=2)
+            Counter(
+                min=0,
+                max=255,
+                count = countR,
+                onIncrement = { min:Int, max:Int -> if(countR < max) countR++ },
+                onDecrement = { min:Int, max:Int -> if(countR > min) countR-- },
+            )
+            Counter(
+                min=0,
+                max=255,
+                count = countG,
+                onIncrement = { min:Int, max:Int -> if(countG < max) countG++ },
+                onDecrement = { min:Int, max:Int -> if(countG > min) countG-- },
+            )
+            Counter(
+                min=0,
+                max=255,
+                count = countB,
+                onIncrement = { min:Int, max:Int -> if(countB < max) countB++ },
+                onDecrement = { min:Int, max:Int -> if(countB > min) countB-- },
+            )
         }
 
         Column(modifier = Modifier.weight(0.5f)) {
             Box(
                 modifier = Modifier
-                    .background(color = Color(255, 0, 0, 255))
+                    .background(color = Color(countR, countG, countB, 255))
                     .height(100.dp)
                     .width(100.dp)
             )
